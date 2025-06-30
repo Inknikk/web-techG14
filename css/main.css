@@ -1,0 +1,736 @@
+/* ===== DESIGN SYSTEM ===== */
+:root {
+  /* Color Palette */
+  --primary-500: #4caf50; /* Main brand green */
+  --primary-400: #66bb6a; /* Light green */
+  --primary-600: #388e3c; /* Dark green */
+
+  --dark-900: #121212; /* Deepest dark */
+  --dark-800: #1e1e1e; /* Surface dark */
+  --dark-700: #2d2d2d; /* Elevated dark */
+  --dark-600: #3a3a3a; /* Used for feature cards */
+
+  --light-100: #ffffff; /* Pure white */
+  --light-200: #f5f5f5; /* Light background */
+  --light-300: #e0e0e0; /* Borders/divider */
+
+  --accent-500: #ffc107; /* Yellow accent */
+  --error-500: #f44336; /* Error red */
+
+  /* Typography */
+  --text-primary: rgba(255, 255, 255, 0.87);
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --text-disabled: rgba(255, 255, 255, 0.38);
+
+  /* Effects */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.16);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.24);
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+}
+
+/* ===== BASE STYLES ===== */
+html {
+  box-sizing: border-box; /* Crucial for consistent box model */
+}
+
+*, *::before, *::after {
+  box-sizing: inherit; /* Inherit box-sizing for all elements */
+}
+
+body {
+  background-color: var(--dark-900);
+  color: var(--text-primary);
+  font-family: "Inter", -apple-system, BlinkMacMacSystemFont, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevents horizontal scrollbar on body */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Add body.no-scroll class for mobile menu overlay */
+body.no-scroll {
+  overflow-y: hidden; /* Prevents vertical scrolling when mobile menu is open */
+  position: fixed; /* Optional: helps prevent scroll bounce on some devices */
+  width: 100%; /* Ensures fixed body still respects full width */
+}
+
+/* ===== HEADER COMPONENT ===== */
+header {
+  background-color: var(--dark-800);
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--dark-700);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: var(--space-sm) var(--space-lg);
+}
+
+.header-container .logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-500);
+  letter-spacing: 0.5px;
+}
+
+.header-container .logo:hover {
+  color: var(--primary-400);
+}
+
+.header-container nav {
+  display: flex;
+  align-items: center;
+}
+
+.header-container nav #hamburger {
+  display: none;
+  color: var(--light-100);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: var(--space-xs);
+}
+
+.header-container nav #hamburger:hover {
+  color: var(--primary-500);
+}
+
+.header-container nav #nav-menu {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header-container nav #nav-menu li a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: var(--space-xs) 0;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.header-container nav #nav-menu li a:hover {
+  color: var(--primary-500);
+}
+
+.header-container nav #nav-menu li a:hover::after {
+  width: 100%;
+}
+
+.header-container nav #nav-menu li a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-500);
+  transition: width 0.3s ease;
+}
+
+.header-container nav #nav-menu li:last-child a {
+  background-color: rgba(76, 175, 80, 0.15);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.header-container nav #nav-menu li:last-child a:hover {
+  background-color: rgba(76, 175, 80, 0.3);
+}
+
+/* ===== RESPONSIVE DESIGN FOR HEADER ===== */
+@media (max-width: 768px) {
+  .header-container {
+    padding: var(--space-sm);
+  }
+
+  .header-container nav #hamburger {
+    display: block;
+  }
+
+  .header-container nav #nav-menu {
+    position: fixed;
+    top: 72px; /* Adjust to header height */
+    left: -100%; /* Off-screen by default */
+    flex-direction: column;
+    background-color: var(--dark-800);
+    width: 100%;
+    padding: var(--space-md) 0;
+    gap: var(--space-lg);
+    box-shadow: var(--shadow-lg);
+    transition: left 0.3s ease;
+  }
+
+  .header-container nav #nav-menu.active {
+    left: 0; /* Slide in when active */
+  }
+
+  .header-container nav #nav-menu li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .header-container nav #nav-menu li a {
+    display: block;
+    padding: var(--space-xs) var(--space-md);
+  }
+
+  .header-container nav #nav-menu li a::after {
+    display: none; /* Hide underline for mobile menu items */
+  }
+
+  .header-container nav #nav-menu li:last-child a {
+    margin: 0 auto;
+    width: max-content;
+  }
+}
+
+/* ===== HERO SECTION ===== */
+/* ===== HERO SECTION ===== */
+.hero {
+  position: relative;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--light-100);
+  /* overflow: hidden; */
+  padding-top: 72px;
+  padding-bottom: 72px;
+  background-image: url("https://images.unsplash.com/photo-1678203699263-917199c725b2?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGVybyUyMGimge%3Dcenter%2Fcover%20no-repeat");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.hero .hero-content {
+  max-width: 800px;
+  padding: 0 var(--space-md);
+  animation: fadeInUp 1s ease-out;
+  z-index: 1;
+}
+
+.hero .hero-content h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  margin-bottom: var(--space-sm);
+  line-height: 1.2;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  letter-spacing: 1px;
+}
+
+.hero .hero-content p {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  margin-bottom: var(--space-lg);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  opacity: 0.9;
+}
+
+/* Call-to-action button (if you add one to HTML later) */
+.hero .cta-button {
+  display: inline-block;
+  background-color: var(--primary-500);
+  color: white;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.hero .cta-button:hover {
+  background-color: var(--primary-400);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+/* Parallax effect for mobile */
+@media (max-width: 768px) {
+  .hero::before {
+    background-attachment: scroll; /* Disable parallax on mobile */
+  }
+}
+
+/* Animation keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== TEAM SECTION ===== */
+.team {
+  --card-width: 220px; /* Reduced card size */
+  --card-aspect: 3/4; /* Slightly taller portrait ratio */
+  --grid-gap: 1.5rem; /* Define gap as a variable for consistency */
+
+  padding: 3rem 1rem;
+  /* background: var(--dark-800); */
+  background-color: #1a1a1a; /* Overall dark background */
+  background-image: url(/images/magicpattern-mesh-gradient-1751261909492.webp); /* Dark gray bottom-right */
+  background-size: 100% 100%;
+}
+
+.team h2 {
+  text-align: center;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  margin-bottom: 2rem;
+  color: var(--light-100);
+}
+
+.team .team-grid {
+  display: flex; /* Changed to flexbox */
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  justify-content: center; /* THIS IS KEY: Centers items, including the last row */
+  gap: var(--grid-gap); /* Use gap for spacing between cards */
+  width: min(95%, 1000px);
+  margin: 0 auto; /* Center the grid container itself */
+}
+
+.team .team-card {
+  /* Set a flexible width based on --card-width,
+  allowing it to shrink but not grow beyond the defined width.
+  This ensures responsive sizing while respecting the base card width. */
+  flex: 0 0 var(--card-width); /* flex-grow: 0, flex-shrink: 0, flex-basis: var(--card-width) */
+  max-width: 100%; /* Ensure card doesn't exceed parent width on very small screens */
+
+  background: var(--dark-700);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  aspect-ratio: var(--card-aspect);
+  transition: transform 0.2s ease;
+  position: relative;
+}
+
+.team .team-card:hover {
+  transform: translateY(-5px);
+}
+
+.team .team-card a {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.team .team-card img {
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
+  border-bottom: 1px solid var(--dark-600);
+}
+
+.team .team-card .member-info {
+  padding: 0.75rem;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.team .team-card h3 {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+  color: var(--light-100);
+  text-align: center;
+}
+
+.team .team-card .member-id {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: var(--primary-400);
+  text-align: center;
+  background: rgba(76, 175, 80, 0.1);
+  padding: 0.25rem;
+  border-radius: 4px;
+}
+
+/* ===== ABOUT SECTION (Formerly COMPANY INFO SECTION) ===== */
+.company-info {
+  padding: 4rem 0;
+  background: var(--dark-700);
+  position: relative;
+  overflow: hidden;
+}
+
+.company-info .container {
+  width: min(90%, 1200px);
+  margin: 0 auto;
+}
+
+.company-info .text-content {
+  max-width: 800px; /* Good for readable text blocks */
+  margin: 0 auto 3rem; /* Centers text content */
+}
+
+.company-info .text-content h2 {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  margin-bottom: 1.5rem;
+  color: var(--primary-400); /* Consistent branding color */
+  text-align: center; /* Heading centered for "About Us" feel */
+}
+
+.company-info .text-content p {
+  line-height: 1.7; /* Good for readability */
+  margin-bottom: 1.5rem;
+  color: var(--text-secondary);
+}
+
+.company-info .features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid for mission/values */
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.company-info .features-grid .feature {
+  background: var(--dark-600);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 3px solid var(--primary-500); /* Nice visual accent */
+}
+
+.company-info .features-grid .feature h3 {
+  color: var(--light-100);
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+/* Scrolling Text Effect */
+.company-info .scrolling-banner {
+  background: var(--primary-600); /* Distinct background for the banner */
+  color: white;
+  padding: 1rem 0;
+  margin-top: 3rem;
+  overflow: hidden; /* Crucial for hiding content outside the banner */
+  position: relative; /* For positioning pseudo-elements */
+}
+
+/* Gradient fades at edges */
+.company-info .scrolling-banner::before,
+.company-info .scrolling-banner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  z-index: 2; /* Ensures they are on top of the scrolling content */
+  background: linear-gradient(
+    to right,
+    var(--dark-700) 0%,
+    transparent 100%
+  );
+}
+
+.company-info .scrolling-banner::before {
+  left: 0;
+}
+
+.company-info .scrolling-banner::after {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    var(--dark-700) 0%,
+    transparent 100%
+  );
+}
+
+.company-info .scrolling-content {
+  display: flex;
+  white-space: nowrap; /* Prevents text from wrapping */
+  animation: scrollText 20s linear infinite; /* Smooth, continuous animation */
+}
+
+.company-info .scrolling-content span {
+  display: inline-block;
+  padding-right: 2rem; /* Space between repeated text */
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+@keyframes scrollText {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* Scrolls half the content width */
+}
+
+/* Accessibility for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .company-info .scrolling-content {
+    animation: none; /* Disables animation */
+    white-space: normal; /* Allows text to wrap */
+    text-align: center; /* Centers the static text */
+  }
+}
+
+/* ===== CAROUSEL SECTION ===== */
+.carousel-section {
+  padding: 3rem 0; /* Vertical padding around the entire section */
+  background: var(--dark-900); /* Consistent background for the section */
+  margin-top: 3rem; /* Space from the previous section */
+}
+
+.carousel-section .carousel-section-content { /* Your standard .container for this section */
+  width: min(90%, 1200px); /* Max width for content, responsive */
+  margin: 0 auto; /* Center the content */
+}
+
+.carousel-section .text-content {
+  max-width: 800px; /* Constrain text width for readability */
+  margin: 0 auto 2.5rem; /* Center text and add bottom margin */
+  text-align: center;
+}
+
+.carousel-section .text-content h2 {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  margin-bottom: 1rem;
+  color: var(--light-100); /* Assuming light text for headings */
+}
+
+.carousel-section .text-content p {
+  font-size: clamp(1rem, 1.5vw, 1.1rem);
+  color: var(--text-secondary); /* Lighter text for paragraphs */
+  line-height: 1.7;
+}
+
+.carousel-outer { /* The main visual block for the carousel */
+  position: relative;
+  width: 100%; /* Takes full width of its parent .container */
+  aspect-ratio: 16 / 9; /* Maintains widescreen ratio */
+  border-radius: 8px; /* Apply border radius here for the entire visual block */
+  overflow: hidden; /* CRUCIAL: Clips images to the border-radius */
+  box-shadow: var(--shadow-lg); /* Nice shadow for depth */
+  background: var(--dark-800); /* Background color of the carousel block itself */
+  display: flex; /* Helps center contents */
+  align-items: center; /* Vertically center carousel-inner */
+  justify-content: center; /* Horizontally center carousel-inner */
+}
+
+.carousel-inner { /* This wraps the sliding images */
+  display: flex;
+  width: 100%; /* Occupies 100% of the carousel-outer */
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures images cover the area without distortion */
+  display: none; /* Hidden by default */
+  flex-shrink: 0; /* Prevents shrinking when sliding */
+  animation: fadeIn 1s ease-out; /* Fade animation on display */
+}
+
+.carousel-inner img.active {
+  display: block; /* Shown by JS */
+}
+
+/* Carousel Buttons */
+.carousel-outer button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  padding: 1rem 1.2rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  opacity: 0.8;
+  box-shadow: var(--shadow-md);
+}
+
+.carousel-outer button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 1;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.carousel-outer .prev {
+  left: 1.5rem; /* Distance from the outer edge */
+}
+
+.carousel-outer .next {
+  right: 1.5rem; /* Distance from the outer edge */
+}
+
+/* Carousel Indicators */
+.carousel-indicators {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.75rem;
+  z-index: 10;
+}
+
+.carousel-indicator {
+  width: 10px;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.carousel-indicator.active {
+  background-color: var(--primary-500);
+  transform: scale(1.2);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive adjustments for carousel */
+@media (max-width: 768px) {
+  .carousel-section {
+    padding: 2rem 0; /* Less vertical padding on smaller screens */
+  }
+  .carousel-section .carousel-section-content {
+      width: 95%; /* Allow it to take more width on smaller screens */
+  }
+  .carousel-outer {
+    border-radius: 0; /* Remove border-radius on mobile for full edge-to-edge look */
+    aspect-ratio: 4 / 3; /* Adjust aspect ratio for tablets/mobiles */
+  }
+  .carousel-outer button {
+    padding: 0.8rem 1rem;
+    font-size: 1.2rem;
+    left: 0.75rem;
+    right: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-outer button {
+    padding: 0.6rem 0.8rem;
+    font-size: 1rem;
+  }
+}
+
+/* --- Call to Action Section Styles --- */
+.cta-section {
+  background-color: var(--dark-800); /* A slightly lighter dark background */
+  padding: 4rem 0; /* Ample vertical padding */
+  text-align: center; /* Center align all content */
+  margin-top: 3rem; /* Space from the carousel section */
+  border-top: 1px solid var(--dark-700); /* Subtle top border */
+   background-image: url("https://images.unsplash.com/photo-1678203699263-917199c725b2?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGVybyUyMGimge%3Dcenter%2Fcover%20no-repeat");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+
+.cta-section .container {
+  width: min(90%, 900px); /* Constrain width for readability and aesthetics */
+  margin: 0 auto; /* Center the container */
+}
+
+.cta-section h2 {
+  font-size: clamp(2rem, 3.5vw, 3rem); /* Responsive font size */
+  color: var(--light-100);
+  margin-bottom: 1rem;
+}
+
+.cta-section p {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem; /* Space below paragraph before button */
+  max-width: 700px; /* Limit paragraph width for better reading */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-section .btn {
+  display: inline-block; /* Allows padding and alignment */
+  background-color: var(--primary-500);
+  color: var(--light-100);
+  padding: 1rem 2.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: var(--shadow-md); /* Add a subtle shadow */
+}
+
+.cta-section .btn:hover {
+  background-color: var(--primary-400);
+  transform: translateY(-2px); /* Slight lift effect */
+  box-shadow: var(--shadow-lg); /* More pronounced shadow on hover */
+}
+
+/* Responsive adjustments for CTA section */
+@media (max-width: 768px) {
+  .cta-section {
+    padding: 3rem 1rem; /* Adjust padding for smaller screens */
+  }
+
+  .cta-section h2 {
+    font-size: clamp(1.8rem, 4.5vw, 2.5rem);
+  }
+
+  .cta-section p {
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    padding: 0 1rem; /* Add horizontal padding for text on small screens */
+  }
+
+  .cta-section .btn {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+  }
+}
+
+
+/* ===== FOOTER ===== */
+.footer {
+  background-color: var(--dark-800);
+  color: var(--text-secondary);
+  text-align: center;
+  padding: var(--space-md) var(--space-sm);
+  font-size: 0.9rem;
+  margin-top: 3rem; /* Space from content above */
+  border-top: 1px solid var(--dark-700);
+}

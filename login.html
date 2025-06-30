@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CompanyX | Login / Sign Up</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* ===== DESIGN SYSTEM ===== */
+      :root {
+        /* Color Palette */
+        --primary-500: #4caf50;
+        --primary-400: #66bb6a;
+        --primary-600: #388e3c;
+
+        --dark-900: #121212;
+        --dark-800: #1e1e1e;
+        --dark-700: #2d2d2d;
+        --dark-600: #3a3a3a;
+
+        --light-100: #ffffff;
+        --light-200: #f5f5f5;
+        --light-300: #e0e0e0;
+
+        --accent-500: #ffc107;
+        --error-500: #f44336;
+        --info-500: #2196f3;
+
+        /* Typography */
+        --text-primary: rgba(255, 255, 255, 0.87);
+        --text-secondary: rgba(255, 255, 255, 0.6);
+        --text-disabled: rgba(255, 255, 255, 0.38);
+
+        /* Effects */
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+        --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.16);
+        --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.24);
+
+        /* Spacing */
+        --space-xs: 0.5rem;
+        --space-sm: 1rem;
+        --space-md: 1.5rem;
+        --space-lg: 2rem;
+        --space-xl: 3rem;
+      }
+
+      /* ===== BASE STYLES ===== */
+      html {
+        box-sizing: border-box;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: inherit;
+      }
+
+      body {
+        background-color: var(--dark-900);
+        color: var(--text-primary);
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--space-md);
+      }
+
+      /* ===== HEADER COMPONENT ===== */
+      header {
+        background-color: var(--dark-800);
+        box-shadow: var(--shadow-md);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        border-bottom: 1px solid var(--dark-700);
+      }
+
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: var(--space-sm) var(--space-lg);
+      }
+
+      .header-container .logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--primary-500);
+        letter-spacing: 0.5px;
+      }
+
+      .header-container .logo:hover {
+        color: var(--primary-400);
+      }
+
+      .header-container nav {
+        display: flex;
+        align-items: center;
+      }
+
+      .header-container nav #hamburger {
+        display: none;
+        color: var(--light-100);
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: var(--space-xs);
+      }
+
+      .header-container nav #hamburger:hover {
+        color: var(--primary-500);
+      }
+
+      .header-container nav #nav-menu {
+        display: flex;
+        gap: var(--space-md);
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .header-container nav #nav-menu li a {
+        color: var(--text-primary);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1rem;
+        padding: var(--space-xs) 0;
+        position: relative;
+        transition: color 0.2s ease;
+      }
+
+      .header-container nav #nav-menu li a:hover {
+        color: var(--primary-500);
+      }
+
+      .header-container nav #nav-menu li a:hover::after {
+        width: 100%;
+      }
+
+      .header-container nav #nav-menu li a::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--primary-500);
+        transition: width 0.3s ease;
+      }
+
+      .header-container nav #nav-menu li:last-child a {
+        background-color: rgba(76, 175, 80, 0.15);
+        padding: var(--space-xs) var(--space-sm);
+        border-radius: 4px;
+        transition: background-color 0.2s ease;
+      }
+
+      .header-container nav #nav-menu li:last-child a:hover {
+        background-color: rgba(76, 175, 80, 0.3);
+      }
+
+      @media (max-width: 768px) {
+        .header-container {
+          padding: var(--space-sm);
+        }
+
+        .header-container nav #hamburger {
+          display: block;
+        }
+
+        .header-container nav #nav-menu {
+          position: fixed;
+          top: 72px;
+          left: -100%;
+          flex-direction: column;
+          background-color: var(--dark-800);
+          width: 100%;
+          padding: var(--space-md) 0;
+          gap: var(--space-lg);
+          box-shadow: var(--shadow-lg);
+          transition: left 0.3s ease;
+        }
+
+        .header-container nav #nav-menu.active {
+          left: 0;
+        }
+
+        .header-container nav #nav-menu li {
+          width: 100%;
+          text-align: center;
+        }
+
+        .header-container nav #nav-menu li a {
+          display: block;
+          padding: var(--space-xs) var(--space-md);
+        }
+
+        .header-container nav #nav-menu li a::after {
+          display: none;
+        }
+
+        .header-container nav #nav-menu li:last-child a {
+          margin: 0 auto;
+          width: max-content;
+        }
+
+        body.no-scroll {
+          overflow-y: hidden;
+          position: fixed;
+          width: 100%;
+        }
+      }
+
+      /* ===== LOGIN/SIGNUP PAGE STYLES ===== */
+      .auth-container {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--space-xl) var(--space-md);
+      }
+
+      .auth-card {
+        background-color: var(--dark-800);
+        border-radius: 10px;
+        box-shadow: var(--shadow-lg);
+        width: 100%;
+        max-width: 450px;
+        overflow: hidden;
+        border: 1px solid var(--dark-700);
+      }
+
+      .auth-tabs {
+        display: flex;
+        justify-content: space-around;
+        border-bottom: 1px solid var(--dark-700);
+      }
+
+      .auth-tab {
+        flex: 1;
+        padding: var(--space-md);
+        text-align: center;
+        cursor: pointer;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        transition: background-color 0.3s ease, color 0.3s ease;
+        position: relative;
+      }
+
+      .auth-tab::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background-color: transparent;
+        transition: background-color 0.3s ease;
+      }
+
+      .auth-tab.active {
+        color: var(--primary-500);
+      }
+
+      .auth-tab.active::after {
+        background-color: var(--primary-500);
+      }
+
+      .auth-tab:hover:not(.active) {
+        background-color: var(--dark-700);
+        color: var(--light-100);
+      }
+
+      .auth-form-content {
+        padding: var(--space-xl);
+      }
+
+      .auth-form {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-md);
+      }
+
+      .auth-form h2 {
+        font-size: 1.8rem;
+        color: var(--primary-400);
+        margin-bottom: var(--space-lg);
+        text-align: center;
+      }
+
+      .auth-form label {
+        color: var(--text-primary);
+        font-weight: 500;
+        margin-bottom: -0.5rem;
+        display: block;
+      }
+
+      .auth-form input[type="text"],
+      .auth-form input[type="email"],
+      .auth-form input[type="password"] {
+        background-color: var(--dark-700);
+        border: 1px solid var(--dark-600);
+        border-radius: 6px;
+        padding: var(--space-sm);
+        color: var(--light-100);
+        font-size: 1rem;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        width: 100%;
+      }
+
+      .auth-form input[type="text"]:focus,
+      .auth-form input[type="email"]:focus,
+      .auth-form input[type="password"]:focus {
+        border-color: var(--primary-500);
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+      }
+
+      .auth-form button {
+        background-color: var(--primary-500);
+        color: var(--light-100);
+        border: none;
+        padding: var(--space-sm) var(--space-lg);
+        border-radius: 6px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease,
+          box-shadow 0.3s ease;
+        box-shadow: var(--shadow-md);
+        margin-top: var(--space-md);
+      }
+
+      .auth-form button:hover {
+        background-color: var(--primary-400);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      /* Hide forms by default */
+      #loginFormSection,
+      #signupFormSection {
+        display: none;
+      }
+
+      #loginFormSection.active,
+      #signupFormSection.active {
+        display: block;
+      }
+
+      /* ===== POPUP CONFIRMATION/ERROR STYLES ===== */
+      .popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+
+      .popup-overlay.show {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      .popup-content {
+        background-color: var(--dark-800);
+        color: var(--light-100);
+        padding: 2.5rem;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: var(--shadow-lg);
+        transform: translateY(20px);
+        opacity: 0;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        max-width: 450px;
+        width: 90%;
+        border: 1px solid;
+      }
+
+      .popup-overlay.show .popup-content {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .popup-content.success {
+        border-color: var(--primary-600);
+      }
+      .popup-content.error {
+        border-color: var(--error-500);
+      }
+      .popup-content.info {
+        border-color: var(--info-500);
+      }
+
+      .popup-content .icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+      }
+
+      .popup-content.success .icon {
+        color: var(--primary-500);
+      }
+      .popup-content.error .icon {
+        color: var(--error-500);
+      }
+      .popup-content.info .icon {
+        color: var(--info-500);
+      }
+
+      .popup-content h3 {
+        font-size: 1.8rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .popup-content.success h3 {
+        color: var(--primary-400);
+      }
+      .popup-content.error h3 {
+        color: var(--error-500);
+      }
+      .popup-content.info h3 {
+        color: var(--info-500);
+      }
+
+      .popup-content p {
+        font-size: 1.1rem;
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+        line-height: 1.5;
+      }
+
+      .popup-content button {
+        background-color: var(--primary-500);
+        color: var(--light-100);
+        border: none;
+        padding: 0.8rem 2rem;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      .popup-content button:hover {
+        background-color: var(--primary-400);
+        transform: translateY(-2px);
+      }
+
+      /* ===== FOOTER ===== */
+      .footer {
+        background-color: var(--dark-800);
+        color: var(--text-secondary);
+        text-align: center;
+        padding: var(--space-md) var(--space-sm);
+        font-size: 0.9rem;
+        margin-top: auto;
+        border-top: 1px solid var(--dark-700);
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .auth-container {
+          padding: var(--space-lg) var(--space-sm);
+        }
+
+        .auth-card {
+          border-radius: 0;
+          box-shadow: none;
+        }
+
+        .auth-tab {
+          font-size: 1rem;
+          padding: var(--space-sm);
+        }
+
+        .auth-form-content {
+          padding: var(--space-lg) var(--space-md);
+        }
+
+        .auth-form h2 {
+          font-size: 1.5rem;
+          margin-bottom: var(--space-md);
+        }
+
+        .auth-form button {
+          font-size: 1rem;
+          padding: 0.7rem 1.8rem;
+        }
+
+        .popup-content {
+          padding: 1.5rem;
+        }
+        .popup-content .icon {
+          font-size: 3rem;
+        }
+        .popup-content h3 {
+          font-size: 1.5rem;
+        }
+        .popup-content p {
+          font-size: 0.95rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div class="logo">CompanyX</div>
+        <nav>
+          <div class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+          </div>
+          <ul id="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="index.html#gallery">Gallery</a></li>
+            <li><a href="login.html">Login</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="auth-container">
+      <div class="auth-card">
+        <div class="auth-tabs">
+          <div class="auth-tab active" id="loginTab">Login</div>
+          <div class="auth-tab" id="signupTab">Sign Up</div>
+        </div>
+        <div class="auth-form-content">
+          <section id="loginFormSection" class="active">
+            <form id="loginForm" class="auth-form">
+              <h2>Login to Your Account</h2>
+              <label for="loginUsername">Username or Email:</label>
+              <input type="text" id="loginUsername" name="username" required />
+
+              <label for="loginPassword">Password:</label>
+              <input
+                type="password"
+                id="loginPassword"
+                name="password"
+                required
+              />
+
+              <button type="submit">Login</button>
+            </form>
+          </section>
+
+          <section id="signupFormSection">
+            <form id="signupForm" class="auth-form">
+              <h2>Create New Account</h2>
+              <label for="signupUsername">Username:</label>
+              <input
+                type="text"
+                id="signupUsername"
+                name="username"
+                required
+              />
+
+              <label for="signupEmail">Email:</label>
+              <input type="email" id="signupEmail" name="email" required />
+
+              <label for="signupPassword">Password:</label>
+              <input
+                type="password"
+                id="signupPassword"
+                name="password"
+                required
+              />
+
+              <label for="signupConfirmPassword">Confirm Password:</label>
+              <input
+                type="password"
+                id="signupConfirmPassword"
+                name="confirmPassword"
+                required
+              />
+
+              <button type="submit">Sign Up</button>
+            </form>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>© 2023 CompanyX. All rights reserved.</p>
+    </footer>
+
+    <div class="popup-overlay" id="notificationPopup">
+      <div class="popup-content">
+        <div class="icon"></div>
+        <h3></h3>
+        <p></p>
+        <button id="closePopup">OK</button>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // --- Header Navigation System ---
+        const hamburger = document.getElementById("hamburger");
+        const navMenu = document.getElementById("nav-menu");
+        const navLinks = document.querySelectorAll("#nav-menu a");
+        const header = document.querySelector("header");
+
+        if (hamburger && navMenu && navLinks.length > 0 && header) {
+          hamburger.addEventListener("click", () => {
+            navMenu.classList.toggle("active");
+            const hamburgerIcon = hamburger.querySelector("i");
+            if (hamburgerIcon) {
+              hamburgerIcon.classList.toggle("fa-bars");
+              hamburgerIcon.classList.toggle("fa-times");
+            }
+            document.body.classList.toggle("no-scroll");
+          });
+
+          navLinks.forEach((link) => {
+            link.addEventListener("click", () => {
+              if (navMenu.classList.contains("active")) {
+                navMenu.classList.remove("active");
+                const hamburgerIcon = hamburger.querySelector("i");
+                if (hamburgerIcon) {
+                  hamburgerIcon.classList.remove("fa-times");
+                  hamburgerIcon.classList.add("fa-bars");
+                }
+                document.body.classList.remove("no-scroll");
+              }
+            });
+          });
+
+          document.addEventListener("click", (e) => {
+            if (!e.target.closest("nav") && !e.target.closest("#hamburger")) {
+              if (navMenu.classList.contains("active")) {
+                navMenu.classList.remove("active");
+                const hamburgerIcon = hamburger.querySelector("i");
+                if (hamburgerIcon) {
+                  hamburgerIcon.classList.remove("fa-times");
+                  hamburgerIcon.classList.add("fa-bars");
+                }
+                document.body.classList.remove("no-scroll");
+              }
+            }
+          });
+        }
+
+        // --- Tab Switching Logic ---
+        const loginTab = document.getElementById("loginTab");
+        const signupTab = document.getElementById("signupTab");
+        const loginFormSection = document.getElementById("loginFormSection");
+        const signupFormSection = document.getElementById("signupFormSection");
+
+        loginTab.addEventListener("click", () => {
+          loginTab.classList.add("active");
+          signupTab.classList.remove("active");
+          loginFormSection.classList.add("active");
+          signupFormSection.classList.remove("active");
+        });
+
+        signupTab.addEventListener("click", () => {
+          signupTab.classList.add("active");
+          loginTab.classList.remove("active");
+          signupFormSection.classList.add("active");
+          loginFormSection.classList.remove("active");
+        });
+
+        // --- Popup Notification Logic ---
+        const notificationPopup = document.getElementById("notificationPopup");
+        const popupContent = notificationPopup.querySelector(".popup-content");
+        const popupIcon = popupContent.querySelector(".icon");
+        const popupTitle = popupContent.querySelector("h3");
+        const popupMessage = popupContent.querySelector("p");
+        const closePopupButton = document.getElementById("closePopup");
+
+        function showPopup(type, title, message) {
+          popupContent.classList.remove("success", "error", "info");
+          popupIcon.innerHTML = "";
+
+          popupContent.classList.add(type);
+          if (type === "success") {
+            popupIcon.innerHTML = '<i class="fas fa-check-circle"></i>';
+          } else if (type === "error") {
+            popupIcon.innerHTML = '<i class="fas fa-times-circle"></i>';
+          } else if (type === "info") {
+            popupIcon.innerHTML = '<i class="fas fa-info-circle"></i>';
+          }
+
+          popupTitle.textContent = title;
+          popupMessage.textContent = message;
+          notificationPopup.classList.add("show");
+          document.body.classList.add("no-scroll");
+        }
+
+        function hidePopup() {
+          notificationPopup.classList.remove("show");
+          document.body.classList.remove("no-scroll");
+        }
+
+        closePopupButton.addEventListener("click", hidePopup);
+        notificationPopup.addEventListener("click", (e) => {
+          if (e.target === notificationPopup) {
+            hidePopup();
+          }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && notificationPopup.classList.contains('show')) {
+                hidePopup();
+            }
+        });
+
+        // --- Login Form Submission ---
+        const loginForm = document.getElementById("loginForm");
+
+        // Reset loginAttempts on fresh page load to ensure first try fails consistently
+        localStorage.removeItem('loginAttempts');
+
+        loginForm.addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const username = document.getElementById("loginUsername").value.trim();
+          const password = document.getElementById("loginPassword").value.trim();
+
+          let loginAttempts = parseInt(localStorage.getItem('loginAttempts') || '0');
+          loginAttempts++;
+          localStorage.setItem('loginAttempts', loginAttempts.toString());
+
+          if (loginAttempts === 1) {
+            showPopup(
+              "error",
+              "Login Failed",
+              "Incorrect username or password. Please try again."
+            );
+            document.getElementById("loginPassword").value = "";
+
+          } else {
+            localStorage.setItem("isLoggedIn", "true");
+            localStorage.setItem("loggedInUser", username || "Guest");
+
+            showPopup("success", "Login Successful!", "Redirecting to dashboard...");
+
+            localStorage.removeItem('loginAttempts');
+
+            setTimeout(() => {
+              window.location.href = "dashboard.html";
+            }, 1500);
+          }
+        });
+
+        // --- Signup Form Submission ---
+        const signupForm = document.getElementById("signupForm");
+        signupForm.addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const username = document.getElementById("signupUsername").value;
+          const email = document.getElementById("signupEmail").value;
+          const password = document.getElementById("signupPassword").value;
+          const confirmPassword = document.getElementById(
+            "signupConfirmPassword"
+          ).value;
+
+          if (password !== confirmPassword) {
+            showPopup("error", "Sign Up Failed", "Passwords do not match.");
+            return;
+          }
+
+          showPopup(
+            "success",
+            "Sign Up Successful!",
+            "You can now log in with your new account (simulated)."
+          );
+          signupForm.reset();
+          loginTab.click();
+        });
+      });
+    </script>
+  </body>
+</html>
