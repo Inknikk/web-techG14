@@ -792,30 +792,26 @@ header {
       </section>
 
 <section class="data-display-section">
-  <div class="dashboard-header" style="justify-content: center;">
-    <h2 style="flex:1;text-align:center;">Your Data</h2>
-  </div>
-<div style="display: flex; justify-content: center; margin-bottom: 2rem;">
-  <button id="retrieveRecordsBtn"
-    style="cursor:pointer; width:auto; padding:0.8rem 2.2rem; font-size:1.1rem; border-radius:8px; background:var(--primary-500); color:white; font-weight:600; box-shadow:0 4px 15px rgba(76,175,80,0.18); transition:background 0.2s,transform 0.2s; border:none;">
-    Retrieve Records
-  </button>
-</div>
-  <div class="table-wrapper" id="dataTableWrapper" style="display:none;">
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Value</th>
-          <th>Description</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody id="dataTableBody">
-      </tbody>
-    </table>
-  </div>
+    <div class="dashboard-header">
+        <h2 style="width: 100%; text-align: center;">Your Data</h2>
+        <button id="addNewItemBtn" style="display: none;">Add New Item</button>
+        <button id="retrieveRecordsBtn" style="margin: 1rem auto; width: auto; padding: 1rem 2rem;">Retrieve Records</button>
+    </div>
+    <div class="table-wrapper" id="dataTableWrapper" style="display:none;">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Value</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="dataTableBody">
+            </tbody>
+        </table>
+    </div>
 </section>
     
     </main>
@@ -1116,21 +1112,20 @@ header {
             window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to form
         });
 
-
-
-
-              const retrieveRecordsBtn = document.getElementById("retrieveRecordsBtn");
+        const retrieveRecordsBtn = document.getElementById("retrieveRecordsBtn");
 const dataTableWrapper = document.getElementById("dataTableWrapper");
 
 if (retrieveRecordsBtn && dataTableWrapper) {
   retrieveRecordsBtn.addEventListener("click", () => {
     dataTableWrapper.style.display = "block";
     retrieveRecordsBtn.style.display = "none";
-        loadData();
   });
 }
-      });
 
+
+        // Initial load
+        loadData();
+      });
     </script>
   </body>
 </html>

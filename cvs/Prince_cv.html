@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prince Agyei - CV</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f5f5f5;">
+
+  <div style="width: 90%; max-width: 800px; margin: 30px auto; background: white; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+
+    <div style="text-align: center; margin-bottom: 20px;">
+      <img src="cvimage.jpeg" alt="Prince Agyei" style="width: 40vw; max-width: 150px; height: auto; border-radius: 50%; object-fit: cover; box-shadow: 0 0 6px rgba(0,0,0,0.1);">
+    </div>
+
+    <h1 style="color: #2c3e50; text-align: center; font-size: 6vw; max-font-size: 36px;">Prince Agyei</h1>
+    <p style="text-align: center; font-size: 4vw; max-font-size: 18px; color: #555;">Computer Science Student - University of Cape Coast</p>
+
+    <hr style="margin: 20px 0; border: 1px solid #ddd;">
+
+    <h2 style="color: #2c3e50;">Profile</h2>
+    <p style="font-size: 16px; color: #333;">
+      I am a level 300 Computer Science student at the University of Cape Coast with a strong interest in hardware, networking, and prompt engineering. Passionate about solving real-world problems with technology.
+    </p>
+
+    <h2 style="color: #2c3e50;">Technical Skills</h2>
+    <ul style="font-size: 16px; color: #333;">
+      <li><strong>Prompt Engineering:</strong> OpenAI GPT-4, effective prompt crafting</li>
+      <li><strong>Hardware:</strong> Assembling, troubleshooting, and upgrading systems</li>
+      <li><strong>Networking:</strong> IP addressing, subnetting, and LAN configuration</li>
+    </ul>
+
+    <h2 style="color: #2c3e50;">Soft Skills</h2>
+    <ul style="font-size: 16px; color: #333;">
+      <li>Team collaboration</li>
+      <li>Problem-solving</li>
+      <li>Time management</li>
+    </ul>
+
+    <h2 style="color: #2c3e50;">Education</h2>
+    <p style="font-size: 16px; color: #333;">
+      <strong>University of Cape Coast</strong><br>
+      BSc. Computer Science (Level 300)
+    </p>
+
+    <h2 style="color: #2c3e50;">Projects</h2>
+    <p style="font-size: 16px; color: #333;">
+      <strong>UCC Timetable Website</strong> – HTML, CSS, JavaScript<br>
+      Designed a responsive website with a collapsible sidebar and dynamic content for student schedules.
+    </p>
+
+    <h2 style="color: #2c3e50;">Interests</h2>
+    <ul style="font-size: 16px; color: #333;">
+      <li>Artificial Intelligence and Prompt Engineering</li>
+      <li>Computer Hardware Tinkering</li>
+      <li>Open Source Projects</li>
+    </ul>
+
+    <h2 style="color: #2c3e50;">Languages</h2>
+    <ul style="font-size: 16px; color: #333;">
+      <li>English (Fluent)</li>
+      <li>Twi (Fluent)</li>
+      <li>Ga (Intermediate)</li>
+    </ul>
+
+    <h2 style="color: #2c3e50;">Contact</h2>
+    <p style="font-size: 16px; color: #333;">
+      Email: <span id="email">hidden@example.com</span><br>
+      Phone: <span id="phone">+233 XXX XXX XXX</span>
+    </p>
+
+    <button onclick="revealContact()" style="margin-top: 10px; width: 100%; padding: 10px; background-color: #2c3e50; color: white; border: none; cursor: pointer; font-size: 16px;">
+      Reveal Contact Info
+    </button>
+
+    <div style="text-align: center; margin-top: 20px;">
+      <a href="Prince_Agyei_CV.pdf" download style="display: inline-block; padding: 10px 20px; background-color: #2c3e50; color: white; text-decoration: none; border-radius: 5px; font-size: 16px;">Download CV (PDF)</a>
+    </div>
+
+    <p id="footer" style="margin-top: 40px; font-size: 14px; text-align: center; color: #aaa;">
+      &copy; <span id="year"></span> Prince Agyei. All rights reserved.
+    </p>
+  </div>
+
+  <script>
+    function revealContact() {
+      document.getElementById('email').innerText = 'princeagyei3940@gmail.com';
+      document.getElementById('phone').innerText = '+233 552 338 204';
+    }
+
+    document.getElementById('year').innerText = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
